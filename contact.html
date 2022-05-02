@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="contact.html">Contact List</a></div>
+      <div><a href="favourites.html">Favourites</a></div>
+    </div>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Contact Name</th>
+            <th>Mobile Number</th>
+            <th>Type</th>
+            <th>Favourites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //code your js part here
+    //append your output to tbody
+    var arr = JSON.parse(localStorage.getItem('contactList'))||[]
+
+    var bookMarkArr =JSON.parse(localStorage.getItem("favourites"))||[];
+
+    arr.forEach(function(elem){
+      
+    var tr = document.createElement("tr");
+
+      // var div = document.createElement("tr")
+      var name2 = document.createElement("td")
+      name2.innerText=elem.name
+      var number2 = document.createElement("td")
+      number2.innerText=elem.mobile
+      var type2 = document.createElement("td")
+      type2.innerText=elem.type
+      var bookmark =document.createElement("td")
+      bookmark.innerText="Favourites"
+      bookmark.style.color="blue"
+      bookmark.style.cursor="pointer"
+      bookmark.addEventListener("click",function(){
+        favouritesFunction(elem)
+      })
+
+      tr.append(name2,number2,type2,bookmark)
+      document.querySelector("tbody").append(tr)
+    })
+    
+    function favouritesFunction(elem){
+      bookMarkArr.push(elem);
+      localStorage.setItem("favourites",JSON.stringify(bookMarkArr))
+    }
+
+
+  </script>
+</html>
